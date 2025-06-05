@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Grope Hamilton Lawyers – Pull-Out Book Spine Demo (Final)</title>
   <style>
-    /* =========== Full reset =========== */
     * {
       margin: 0;
       padding: 0;
@@ -13,19 +12,17 @@
     html, body {
       width: 100%;
       height: 100%;
-      background-color: #f0f0f0; /* Light gray background */
+      background-color: #f0f0f0;
       font-family: Arial, sans-serif;
-      overflow: hidden; /* Prevent global scrolling */
+      overflow: hidden; 
     }
 
-    /* =========== Book section namespace =========== */
     #book-section {
       position: relative;
       width: 100%;
       height: 100%;
     }
 
-    /* 3D perspective container */
     #book-section .bookshelf-container {
       position: relative;
       width: 100%;
@@ -35,17 +32,16 @@
       background-color: #f0f0f0;
     }
 
-    /* Wooden shelf bar */
     #book-section .shelf-bar {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 80px;            /* Shelf height */
-      background-color: #8B4513; /* Dark brown */
+      height: 80px;            
+      background-color: #8B4513; 
       box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
     }
-    /* Title on the shelf */
+    
     #book-section .shelf-bar .shelf-title {
       position: absolute;
       top: 50%;
@@ -57,28 +53,26 @@
       white-space: nowrap;
     }
 
-    /* Book base class */
     #book-section .book {
       position: absolute;
-      bottom: 80px;            /* On top of shelf */
-      width: 80px;             /* Book thickness */
-      height: 240px;           /* Book height */
-      background-color: #ef3125; /* Red color */
+      bottom: 80px;           
+      width: 80px;            
+      height: 240px;         
+      background-color: #ef3125; 
       cursor: pointer;
-      transform-origin: left bottom; /* Pivot from bottom-left corner */
+      transform-origin: left bottom; 
       transition: transform 0.4s ease, box-shadow 0.3s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      overflow: visible;       /* Allow spine text to show fully */
+      overflow: visible;     
     }
     #book-section .book:hover {
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
     #book-section .book.open {
       transform: translateX(150px) rotateY(-30deg);
-      z-index: 10; /* Bring to front when opened */
+      z-index: 10; 
     }
 
-    /* Spine text - rotated for full visibility */
     #book-section .spine-text {
       position: absolute;
       top: 50%;
@@ -90,11 +84,10 @@
       color: #ffffff;
       white-space: nowrap;
       text-align: center;
-      user-select: none; /* Prevent text selection */
-      padding: 0 5px;   /* Some padding for clarity */
+      user-select: none; 
+      padding: 0 5px; 
     }
 
-    /* Modal overlay */
     #book-section .overlay {
       position: fixed;
       top: 0;
@@ -111,7 +104,6 @@
       display: flex;
     }
 
-    /* Modal box */
     #book-section .modal {
       position: relative;
       width: 90%;
@@ -129,10 +121,9 @@
       transform: translateX(-50%);
       width: 6px;
       height: 100%;
-      background: #ef3125; /* Red stripe */
+      background: #ef3125; 
     }
 
-    /* Modal content */
     #book-section .modal-content {
       display: flex;
       padding: 20px;
@@ -169,12 +160,11 @@
     #book-section .modal-close:hover {
       background-color: #d02a1f;
     }
-    /* =========== End of book section styles =========== */
+
   </style>
 </head>
 <body>
 
-  <!-- Book section start -->
   <section id="book-section">
     <div class="bookshelf-container">
       <!-- 8 Books; adjust left values as needed -->
@@ -215,7 +205,7 @@
           <div class="modal-left">
             <h4>Trusted Experience</h4>
             <p>
-              You choose us because we have over 42 years of continuous practice in wills and estate matters. Our firm is a proud Law Society of South Australia Gold Alliance member, recognized for our unwavering commitment to professionalism and ethical standards.
+              With over 42 years of continuous practice, we’ve earned the trust of generations of clients across a broad range of wills and estate matters. We are a proud Law Society of South Australia Gold Alliance Firm, recognised for our commitment to professionalism and ethical practice.
             </p>
           </div>
           <div class="modal-right"></div>
@@ -230,7 +220,7 @@
           <div class="modal-left">
             <h4>Clear Advice</h4>
             <p>
-              We provide legally accurate advice in plain language. Clients trust us for guidance that is easy to understand, without jargon or assumptions, so you can make informed decisions.
+             We provide advice that is both legally accurate and easy to understand. Clients come to us for guidance they can rely on, without jargon and without assumptions.
             </p>
           </div>
           <div class="modal-right"></div>
@@ -243,9 +233,9 @@
         <button class="modal-close">Close</button>
         <div class="modal-content">
           <div class="modal-left">
-            <h4>Personalized Approach</h4>
+            <h4>Personalised Approach</h4>
             <p>
-              Every situation is unique. We tailor our services to your specific needs, focusing on practical, legally sound solutions that minimize the risk of future disputes.
+              Every matter is different. We tailor our services to your circumstances, with a focus on achieving practical, legally sound results and minimising the risk of future disputes.
             </p>
           </div>
           <div class="modal-right"></div>
@@ -258,9 +248,9 @@
         <button class="modal-close">Close</button>
         <div class="modal-content">
           <div class="modal-left">
-            <h4>Transparent Fees</h4>
+            <h4>Transparent and Cost-Effective</h4>
             <p>
-              Our fees are clear and upfront. Where appropriate, we offer fixed-fee options so you always know what to expect and can plan your budget with confidence—no hidden costs or surprises.
+             We believe that transparent and cost-effective legal services are essential for every client. That’s why our fees for wills and estate matters are charged on an hourly basis, with clear explanations provided upfront. This ensures you only pay for the work that is actually done, giving you confidence and control over your legal costs.
             </p>
           </div>
           <div class="modal-right"></div>
@@ -288,9 +278,9 @@
         <button class="modal-close">Close</button>
         <div class="modal-content">
           <div class="modal-left">
-            <h4>Professional Care</h4>
+            <h4>Respectful and Responsive Service</h4>
             <p>
-              You and your family will be treated with the utmost respect, discretion, and genuine care throughout the entire process, recognizing the sensitivity of estate planning.
+              We recognise the sensitivity of estate planning. Clients are treated with courtesy, discretion and genuine care throughout the process.
             </p>
           </div>
           <div class="modal-right"></div>
