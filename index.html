@@ -124,9 +124,6 @@
       opacity: 1;         /* 由 0 → 1 渐显 */
       transform: scaleX(1); /* 由 0 → 1 水平展开 */
     }
-
-
-
     
     #book-section .overlay {
       position: fixed;
@@ -153,37 +150,32 @@
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
-    #book-section .modal::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-3px);
-      width: 6px;
-      height: 100%;
-      background: #ef3125; 
-    }
+   #book-section .modal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-3px);
+    width: 6px;
+    height: 100%;
+    background: #ef3125;
+}
 
-    #book-section .modal-content {
-  display: flex;
-  padding: 20px;
+#book-section .modal-content {
+  display: flex; 
+  padding: 20px;      /* 四周各留 20px */
   color: #333333;
   line-height: 1.6;
-  position: relative;
-  z-index: 1;
+  position: relative; /* 保证层级正确 */
+  z-index: 1;         /* 让文字区显示在红条之上 */
 }
 
 #book-section .modal-left,
 #book-section .modal-right {
   flex: 1;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-#book-section .modal-left {
-  /* 右侧这 20px 就是“文字到红条”的间隙 */
-  border-right: none;
-  /* 不需要额外 margin，因为统一用 padding 来保证对称 */
+  padding-left: 20px;   
+  padding-right: 20px;  
+  text-align: justify;
 }
 
 #book-section .modal-right {
@@ -267,6 +259,7 @@
               With over 42 years of continuous practice, we’ve earned the trust of generations of clients across a broad range of wills and estate matters. 
             </p>
           </div>
+          
           <div class="modal-right"></div>
           <p>
             We are a proud Law Society of South Australia Gold Alliance Firm, recognised for our commitment to professionalism and ethical practice.
@@ -274,6 +267,7 @@
         </div>
       </div>
     </div>
+  </div>  
 
     <div id="modal2" class="overlay">
       <div class="modal">
@@ -315,6 +309,7 @@
              We believe that transparent and cost-effective legal services are essential for every client. That’s why our fees for wills and estate matters are charged on an hourly basis, with clear explanations provided upfront. 
             </p>
           </div>
+          
           <div class="modal-right"></div>
           <p>
           This ensures you only pay for the work that is actually done, giving you confidence and control over your legal costs.
@@ -322,6 +317,7 @@
         </div>
       </div>
     </div>
+  </div>
 
     <div id="modal5" class="overlay">
       <div class="modal">
@@ -368,6 +364,8 @@
         </div>
       </div>
     </div>
+  </div>
+    
     <div id="modal8" class="overlay">
       <div class="modal">
         <button class="modal-close">Close</button>
@@ -376,6 +374,7 @@
             <h4>Comprehensive Service</h4>
             <p>At Grope Hamilton Lawyers, we provide more than just will drafting. Our service extends across all aspects of estate planning and administration, including but not limited to assistance with probate and letters of administration, support for executors in fulfilling their duties, and advice on estate disputes or family provision claims should they arise.</p>
           </div>
+          
           <div class="modal-right"></div>
           <p>
           This comprehensive approach ensures you have consistent, trusted guidance, no matter how your circumstances may evolve.  
@@ -383,11 +382,9 @@
        </div>
       </div>
     </div>
-
+  </div>
   </section>
-  <!-- Book section end -->
 
-  <!-- Interaction Script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const books = document.querySelectorAll('#book-section .book');
