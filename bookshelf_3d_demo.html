@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grope Hamilton Lawyers – 3D Pull-Out Book Demo</title>
+  <style>
+    /* =========== Global Reset =========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Lock page scrolling for demo */
+    }
+
+    /* =========== Book Section Namespace =========== */
+    #book-section {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    /* 3D perspective container */
+    #book-section .bookshelf-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      perspective: 800px;
+      overflow: hidden;
+      background-color: #f0f0f0;
+    }
+    /* Wooden shelf */
+    #book-section .shelf-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background-color: #8B4513;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* 3D Book Container */
+    #book-section .book-3d {
+      position: absolute;
+      bottom: 80px;
+      width: 20px;  /* thickness */
+      height: 200px; /* height */
+      transform-style: preserve-3d;
+      transform-origin: left bottom;
+      transform: rotateY(-90deg) translateZ(50px);
+      transition: transform 0.5s ease;
+      cursor: pointer;
+    }
+    #book-section .book-3d:hover {
+      /* Slight shadow pop on hover */
+      filter: brightness(1.1);
+    }
+    #book-section .book-3d.open {
+      transform: translateX(150px) rotateY(-15deg);
+      z-index: 10;
+    }
+
+    /* Spine face */
+    #book-section .book-3d .spine {
+      position: absolute;
+      width: 20px;
+      height: 200px;
+      background-color: #ef3125;
+      transform: rotateY(0deg) translateZ(50px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #book-section .book-3d .spine span {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 16px;
+      user-select: none;
+    }
+
+    /* Cover face */
+    #book-section .book-3d .cover {
+      position: absolute;
+      width: 100px;  /* depth */
+      height: 200px;
+      background-color: #ef3125;
+      transform: rotateY(90deg) translateZ(10px);
+    }
+
+    /* Overlay for modals */
+    #book-section .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+    #book-section .overlay.show {
+      display: flex;
+    }
+
+    /* Modal box */
+    #book-section .modal {
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    #book-section .modal::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 100%;
+      background: #ef3125;
+    }
+    #book-section .modal-content {
+      display: flex;
+      padding: 20px;
+      color: #333333;
+      line-height: 1.6;
+    }
+    #book-section .modal-left,
+    #book-section .modal-right {
+      flex: 1;
+    }
+    #book-section .modal-left h4 {
+      margin-bottom: 10px;
+      color: #ef3125;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    #book-section .modal p {
+      margin-bottom: 8px;
+    }
+    #book-section .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-color: #ef3125;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      z-index: 30;
+    }
+    #book-section .modal-close:hover {
+      background-color: #d02a1f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========== Book Section HTML =========== -->
+  <section id="book-section">
+    <div class="bookshelf-container">
+      <!-- Book 1 -->
+      <div class="book-3d" id="book1" style="left: 60px;">
+        <div class="spine"><span>Trusted Experience</span></div>
+        <div class="cover"></div>
+      </div>
+      <!-- Book 2 -->
+      <div class="book-3d" id="book2" style="left: 160px;">
+        <div class="spine"><span>Clear Advice</span></div>
+        <div class="cover"></div>
+      </div>
+      <!-- Book 3 -->
+      <div class="book-3d" id="book3" style="left: 260px;">
+        <div class="spine"><span>Personalized Approach</span></div>
+        <div class="cover"></div>
+      </div>
+      <!-- Book 4 -->
+      <div class="book-3d" id="book4" style="left: 360px;">
+        <div class="spine"><span>Respect &amp; Care</span></div>
+        <div class="cover"></div>
+      </div>
+      <!-- Book 5 -->
+      <div class="book-3d" id="book5" style="left: 460px;">
+        <div class="spine"><span>Transparent Fees</span></div>
+        <div class="cover"></div>
+      </div>
+      <!-- Book 6 -->
+      <div class="book-3d" id="book6" style="left: 560px;">
+        <div class="spine"><span>Multilingual Support</span></div>
+        <div class="cover"></div>
+      </div>
+
+      <!-- Wooden shelf bar -->
+      <div class="shelf-bar"></div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal1" class="overlay">
+      <div class="modal">
+        <button class="modal-close">Close</button>
+        <div class="modal-content">
+          <div class="modal-left">
+            <h4>Trusted Experience</h4>
+            <p>You choose us because we have over 42 years of continuous practice in wills and estate matters. Our firm is a proud Law Society of South Australia Gold Alliance member, recognized for our unwavering commitment to professionalism and ethical standards.</p>
+          </div>
+          <div class="modal-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="modal2" class="overlay">
+      <div class="modal">
+        <button class="modal-close">Close</button>
+        <div class="modal-content">
+          <div class="modal-left">
+            <h4>Clear Advice</h4>
+            <p>We provide legally accurate advice in plain language. Clients trust us for guidance that is easy to understand, without jargon or assumptions, so you can make informed decisions.</p>
+          </div>
+          <div class="modal-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="modal3" class="overlay">
+      <div class="modal">
+        <button class="modal-close">Close</button>
+        <div class="modal-content">
+          <div class="modal-left">
+            <h4>Personalized Approach</h4>
+            <p>Every situation is unique. We tailor our services to your specific needs, focusing on practical, legally sound solutions that minimize the risk of future disputes.</p>
+          </div>
+          <div class="modal-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="modal4" class="overlay">
+      <div class="modal">
+        <button class="modal-close">Close</button>
+        <div class="modal-content">
+          <div class="modal-left">
+            <h4>Respect &amp; Care</h4>
+            <p>We understand the sensitivity of estate planning. You and your family will be treated with the utmost respect, discretion, and genuine care throughout the entire process.</p>
+          </div>
+          <div class="modal-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="modal5" class="overlay">
+      <div class="modal">
+        <button class="modal-close">Close</button>
+        <div class="modal-content">
+          <div class="modal-left">
+            <h4>Transparent Fees</h4>
+            <p>Our fees are clear and upfront. Where appropriate, we offer fixed-fee options so you always know what to expect and can plan your budget with confidence—no hidden costs or surprises.</p>
+          </div>
+          <div class="modal-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="modal6" class="overlay">
+      <div class="modal">
+        <button class="modal-close">Close</button>
+        <div class="modal-content">
+          <div class="modal-left">
+            <h4>Multilingual Support</h4>
+            <p>We offer multilingual support to assist clients from diverse cultural and linguistic backgrounds, ensuring communication is always clear and appropriate for your needs.</p>
+          </div>
+          <div class="modal-right"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== Interaction Script =========== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const books = document.querySelectorAll('#book-section .book-3d');
+      const overlays = document.querySelectorAll('#book-section .overlay');
+
+      books.forEach(book => {
+        book.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Close other open books and modals
+          books.forEach(b => { if (b !== book) b.classList.remove('open'); });
+          overlays.forEach(ov => ov.classList.remove('show'));
+
+          // Toggle this book's open state
+          book.classList.toggle('open');
+
+          // Show or hide corresponding modal
+          const modalId = book.id.replace('book', 'modal');
+          const modal = document.getElementById(modalId);
+          if (book.classList.contains('open')) {
+            modal.classList.add('show');
+          } else {
+            modal.classList.remove('show');
+          }
+        });
+      });
+
+      const closeButtons = document.querySelectorAll('#book-section .modal-close');
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const overlay = btn.closest('.overlay');
+          overlay.classList.remove('show');
+          const bookId = overlay.id.replace('modal', 'book');
+          document.getElementById(bookId).classList.remove('open');
+        });
+      });
+
+      overlays.forEach(ov => {
+        ov.addEventListener('click', function() {
+          ov.classList.remove('show');
+          const bookId = ov.id.replace('modal', 'book');
+          document.getElementById(bookId).classList.remove('open');
+        });
+      });
+
+      document.body.addEventListener('click', function() {
+        books.forEach(b => b.classList.remove('open'));
+        overlays.forEach(ov => ov.classList.remove('show'));
+      });
+    });
+  </script>
+</body>
+</html>
