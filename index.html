@@ -30,6 +30,9 @@
       perspective: 800px;  
       overflow: hidden;
       background-color: #f0f0f0;
+      display: flex;
+      justify-content: space-evenly; 
+      align-items: flex-end;         
     }
 
     #book-section .shelf-bar {
@@ -54,7 +57,7 @@
     }
 
     #book-section .book {
-      position: absolute;
+      position: relative;
       bottom: 80px;           
       width: 80px;            
       height: 330px;         
@@ -63,7 +66,8 @@
       transform-origin: left bottom; 
       transition: transform 0.4s ease, box-shadow 0.3s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      overflow: visible;     
+      overflow: visible;
+      margin-bottom: 80px;
     }
     #book-section .book:hover {
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
