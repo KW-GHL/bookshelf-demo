@@ -91,7 +91,43 @@
       user-select: none; 
       padding: 0 5px; 
     }
+ /* ===== 5. 新增：左页和右页内容 ===== */
+    /* 两个页面都使用绝对定位，相对于 .book 的左上角定位 */
+    #book-section .left-page,
+    #book-section .right-page {
+      position: absolute;
+      top: 0;             /* 对齐到 .book 顶部 */
+      width: 200px;       /* “页”宽度，可根据需要再调 */
+      height: 340px;      /* 与 .book 等高 */
+      background-color: #ffffff;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      overflow-y: auto;   /* 如果文字很多，出现滚动条 */
+      padding: 20px;      /* 内边距确保文字不贴边 */
+      color: #333333;
+      opacity: 0;         /* 初始隐藏（透明） */
+      transform: scaleX(0); /* 初始水平收缩到 0，不占空间 */
+      transform-origin: left top;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 5;         /* 让文字页在书本之上显示 */
+    }
+    /* 左页靠 .book 左侧（负值回退），右页贴在书的右侧（100% 位置） */
+    #book-section .left-page {
+      left: -200px;       /* 相当于把宽度 200px 的页面放在书左边 */
+    }
+    #book-section .right-page {
+      left: 100%;         /* 紧挨在 .book 右侧 */
+    }
 
+    /* 只有当 .book.open 时，左右两页才“摊开”并显示文字 */
+    #book-section .book.open .left-page,
+    #book-section .book.open .right-page {
+      opacity: 1;         /* 由 0 → 1 渐显 */
+      transform: scaleX(1); /* 由 0 → 1 水平展开 */
+    }
+
+
+
+    
     #book-section .overlay {
       position: fixed;
       top: 0;
@@ -209,10 +245,13 @@
           <div class="modal-left">
             <h4>Trusted Legal Experience</h4>
             <p>
-              With over 42 years of continuous practice, we’ve earned the trust of generations of clients across a broad range of wills and estate matters. We are a proud Law Society of South Australia Gold Alliance Firm, recognised for our commitment to professionalism and ethical practice.
+              With over 42 years of continuous practice, we’ve earned the trust of generations of clients across a broad range of wills and estate matters. 
             </p>
           </div>
           <div class="modal-right"></div>
+          <p>
+            We are a proud Law Society of South Australia Gold Alliance Firm, recognised for our commitment to professionalism and ethical practice.
+          </p>  
         </div>
       </div>
     </div>
@@ -254,10 +293,13 @@
           <div class="modal-left">
             <h4>Transparent and Cost-Effective</h4>
             <p>
-             We believe that transparent and cost-effective legal services are essential for every client. That’s why our fees for wills and estate matters are charged on an hourly basis, with clear explanations provided upfront. This ensures you only pay for the work that is actually done, giving you confidence and control over your legal costs.
+             We believe that transparent and cost-effective legal services are essential for every client. That’s why our fees for wills and estate matters are charged on an hourly basis, with clear explanations provided upfront. 
             </p>
           </div>
           <div class="modal-right"></div>
+          <p>
+          This ensures you only pay for the work that is actually done, giving you confidence and control over your legal costs.
+          </p>  
         </div>
       </div>
     </div>
@@ -298,9 +340,12 @@
         <div class="modal-content">
            <div class="modal-left">
             <h4>Efficient and Timely Communication</h4>
-            <p>We understand that clarity and timely updates are essential when dealing with wills and estate matters. Our team responds promptly to your queries and keeps you informed at every stage, ensuring you never feel left in the dark and always know what to expect next.</p>
+            <p>We understand that clarity and timely updates are essential when dealing with wills and estate matters.</p>
           </div>
           <div class="modal-right"></div>
+          <p>
+           Our team responds promptly to your queries and keeps you informed at every stage, ensuring you never feel left in the dark and always know what to expect next.
+          </p>
         </div>
       </div>
     </div>
@@ -310,10 +355,13 @@
         <div class="modal-content">
           <div class="modal-left">
             <h4>Comprehensive Service</h4>
-            <p>At Grope Hamilton Lawyers, we provide more than just will drafting. Our service extends across all aspects of estate planning and administration, including but not limited to assistance with probate and letters of administration, support for executors in fulfilling their duties, and advice on estate disputes or family provision claims should they arise. This comprehensive approach ensures you have consistent, trusted guidance, no matter how your circumstances may evolve.</p>
+            <p>At Grope Hamilton Lawyers, we provide more than just will drafting. Our service extends across all aspects of estate planning and administration, including but not limited to assistance with probate and letters of administration, support for executors in fulfilling their duties, and advice on estate disputes or family provision claims should they arise.</p>
           </div>
           <div class="modal-right"></div>
-        </div>
+          <p>
+          This comprehensive approach ensures you have consistent, trusted guidance, no matter how your circumstances may evolve.  
+          </p>
+       </div>
       </div>
     </div>
 
